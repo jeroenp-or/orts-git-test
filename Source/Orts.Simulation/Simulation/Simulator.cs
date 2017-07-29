@@ -129,7 +129,7 @@ namespace Orts.Simulation
         public string PathName = "<unknown>";
         public float InitialTileX;
         public float InitialTileZ;
-        public HazzardManager HazzardManager;
+        public HazardManager HazardManager;
         public FuelManager FuelManager;
         public bool InControl = true;//For multiplayer, a player may not control his/her own train (as helper)
         public TurntableFile TurntableFile;
@@ -338,7 +338,7 @@ namespace Orts.Simulation
             }
 
             Confirmer = new Confirmer(this, 1.5);
-            HazzardManager = new HazzardManager(this);
+            HazardManager = new HazardManager(this);
             FuelManager = new FuelManager(this);
             ScriptManager = new ScriptManager(this);
             Log = new CommandLog(this);
@@ -709,7 +709,7 @@ namespace Orts.Simulation
                 ActivityRun.Update();
             }
 
-            if (HazzardManager != null) HazzardManager.Update(elapsedClockSeconds);
+            if (HazardManager != null) HazardManager.Update(elapsedClockSeconds);
         }
 
         internal void SetWeather(WeatherType weather, SeasonType season)

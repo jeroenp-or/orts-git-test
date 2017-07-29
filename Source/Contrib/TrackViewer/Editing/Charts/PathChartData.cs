@@ -731,7 +731,7 @@ namespace ORTS.TrackViewer.Editing.Charts
                     break;
                 case TrItem.trItemType.trSIDING:
                     break;
-                case TrItem.trItemType.trHAZZARD:
+                case TrItem.trItemType.trHAZARD:
                     break;
                 case TrItem.trItemType.trPICKUP:
                     break;

@@ -766,7 +766,7 @@ namespace Orts.Common
             if (ToState)
             {
                 Receiver.AlerterReset(TCSEvent.HornActivated);
-                Receiver.Simulator.HazzardManager.Horn();
+                Receiver.Simulator.HazardManager.Horn();
             }
         }
 

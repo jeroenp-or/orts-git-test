@@ -63,7 +63,7 @@ namespace ORTS.TrackViewer.Drawing
             if (originalTrItem is PlatformItem)   { return new DrawablePlatformItem(originalTrItem); }
             if (originalTrItem is SidingItem)     { return new DrawableSidingItem(originalTrItem); }
             if (originalTrItem is SpeedPostItem)  { return new DrawableSpeedPostItem(originalTrItem); }
-            if (originalTrItem is HazzardItem)    { return new DrawableHazardItem(originalTrItem); }
+            if (originalTrItem is HazardItem)    { return new DrawableHazardItem(originalTrItem); }
             if (originalTrItem is PickupItem)     { return new DrawablePickupItem(originalTrItem); }
             if (originalTrItem is LevelCrItem)    { return new DrawableLevelCrItem(originalTrItem); }
             if (originalTrItem is SoundRegionItem){ return new DrawableSoundRegionItem(originalTrItem); }

@@ -126,7 +126,8 @@ namespace Orts.Formats.Msts
                         new STFReader.TokenProcessor("emptyitem", ()=>{ TrItemTable[idx] = new EmptyItem(stf,idx); }),
                         new STFReader.TokenProcessor("levelcritem", ()=>{ TrItemTable[idx] = new LevelCrItem(stf,idx); }),
                         new STFReader.TokenProcessor("sidingitem", ()=>{ TrItemTable[idx] = new SidingItem(stf,idx); }),
-                        new STFReader.TokenProcessor("hazzarditem", ()=>{ TrItemTable[idx] = new HazzardItem(stf,idx); }),
+                        new STFReader.TokenProcessor("hazzarditem", ()=>{ TrItemTable[idx] = new HazardItem(stf,idx); }),
+                        new STFReader.TokenProcessor("hazarditem", ()=>{ TrItemTable[idx] = new HazardItem(stf,idx); }),
                         new STFReader.TokenProcessor("pickupitem", ()=>{ TrItemTable[idx] = new PickupItem(stf,idx); }),
                     });
                 }),
@@ -748,7 +749,7 @@ namespace Orts.Formats.Msts
             /// <summary>A siding</summary>
             trSIDING,
             /// <summary>A hazard, meaning something dangerous on or next to track</summary>
-            trHAZZARD,
+            trHAZARD,
             /// <summary>A pickup of fuel, water, ...</summary>
             trPICKUP,
             /// <summary>The place where cars are appear of disappear</summary>
@@ -1335,16 +1336,16 @@ namespace Orts.Formats.Msts
     /// <summary>
     /// Represends a hazard, a place where something more or less dangerous happens
     /// </summary>
-    public class HazzardItem : TrItem
+    public class HazardItem : TrItem
     {
         /// <summary>
         /// Default constructor used during file parsing.
         /// </summary>
         /// <param name="stf">The STFreader containing the file stream</param>
         /// <param name="idx">The index of this TrItem in the list of TrItems</param>
-        public HazzardItem(STFReader stf, int idx)
+        public HazardItem(STFReader stf, int idx)
         {
-            ItemType = trItemType.trHAZZARD;
+            ItemType = trItemType.trHAZARD;
             stf.MustMatch("(");
             stf.ParseBlock(new STFReader.TokenProcessor[] {
                 new STFReader.TokenProcessor("tritemid", ()=>{ ParseTrItemID(stf, idx); }),

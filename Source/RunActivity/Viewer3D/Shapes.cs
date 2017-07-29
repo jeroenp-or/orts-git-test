@@ -746,69 +746,69 @@ namespace Orts.Viewer3D
         }
     }
 
-    public class HazzardShape : PoseableShape
+    public class HazardShape : PoseableShape
     {
         readonly HazardObj HazardObj;
-        readonly Hazzard Hazzard;
+        readonly Hazard Hazard;
 
         readonly int AnimationFrames;
         float Moved = 0f;
         float AnimationKey;
         float DelayHazAnimation;
 
-        public static HazzardShape CreateHazzard(Viewer viewer, string path, WorldPosition position, ShapeFlags shapeFlags, HazardObj hObj)
+        public static HazardShape CreateHazard(Viewer viewer, string path, WorldPosition position, ShapeFlags shapeFlags, HazardObj hObj)
         {
-            var h = viewer.Simulator.HazzardManager.AddHazzardIntoGame(hObj.itemId, hObj.FileName);
+            var h = viewer.Simulator.HazardManager.AddHazardIntoGame(hObj.itemId, hObj.FileName);
             if (h == null) return null;
-            return new HazzardShape(viewer, viewer.Simulator.BasePath + @"\Global\Shapes\" + h.HazFile.Tr_HazardFile.FileName + "\0" + viewer.Simulator.BasePath + @"\Global\Textures", position, shapeFlags, hObj, h);
+            return new HazardShape(viewer, viewer.Simulator.BasePath + @"\Global\Shapes\" + h.HazFile.Tr_HazardFile.FileName + "\0" + viewer.Simulator.BasePath + @"\Global\Textures", position, shapeFlags, hObj, h);
 
         }
 
-        public HazzardShape(Viewer viewer, string path, WorldPosition position, ShapeFlags shapeFlags, HazardObj hObj, Hazzard h)
+        public HazardShape(Viewer viewer, string path, WorldPosition position, ShapeFlags shapeFlags, HazardObj hObj, Hazard h)
             : base(viewer, path, position, shapeFlags)
         {
             HazardObj = hObj;
-            Hazzard = h;
+            Hazard = h;
             AnimationFrames = SharedShape.Animations[0].FrameCount;
         }
 
         public override void Unload()
         {
-            Viewer.Simulator.HazzardManager.RemoveHazzardFromGame(HazardObj.itemId);
+            Viewer.Simulator.HazardManager.RemoveHazardFromGame(HazardObj.itemId);
             base.Unload();
         }
 
         public override void PrepareFrame(RenderFrame frame, ElapsedTime elapsedTime)
         {
-            if (Hazzard == null) return;
+            if (Hazard == null) return;
             Vector2 CurrentRange;
             AnimationKey += elapsedTime.ClockSeconds * 24f;
             DelayHazAnimation += elapsedTime.ClockSeconds;
-            switch (Hazzard.state)
+            switch (Hazard.state)
             {
-                case Hazzard.State.Idle1:
-                    CurrentRange = Hazzard.HazFile.Tr_HazardFile.Idle_Key; break;
-                case Hazzard.State.Idle2:
-                    CurrentRange = Hazzard.HazFile.Tr_HazardFile.Idle_Key2; break;
-                case Hazzard.State.LookLeft:
-                    CurrentRange = Hazzard.HazFile.Tr_HazardFile.Surprise_Key_Left; break;
-                case Hazzard.State.LookRight:
-                    CurrentRange = Hazzard.HazFile.Tr_HazardFile.Surprise_Key_Right; break;
-                case Hazzard.State.Scared:
+                case Hazard.State.Idle1:
+                    CurrentRange = Hazard.HazFile.Tr_HazardFile.Idle_Key; break;
+                case Hazard.State.Idle2:
+                    CurrentRange = Hazard.HazFile.Tr_HazardFile.Idle_Key2; break;
+                case Hazard.State.LookLeft:
+                    CurrentRange = Hazard.HazFile.Tr_HazardFile.Surprise_Key_Left; break;
+                case Hazard.State.LookRight:
+                    CurrentRange = Hazard.HazFile.Tr_HazardFile.Surprise_Key_Right; break;
+                case Hazard.State.Scared:
                 default:
-                    CurrentRange = Hazzard.HazFile.Tr_HazardFile.Success_Scarper_Key;
-                    if (Moved < Hazzard.HazFile.Tr_HazardFile.Distance)
+                    CurrentRange = Hazard.HazFile.Tr_HazardFile.Success_Scarper_Key;
+                    if (Moved < Hazard.HazFile.Tr_HazardFile.Distance)
                     {
-                        var m = Hazzard.HazFile.Tr_HazardFile.Speed * elapsedTime.ClockSeconds;
+                        var m = Hazard.HazFile.Tr_HazardFile.Speed * elapsedTime.ClockSeconds;
                         Moved += m;
                         this.HazardObj.Position.Move(this.HazardObj.QDirection, m);
                         Location.Location = new Vector3(this.HazardObj.Position.X, this.HazardObj.Position.Y, this.HazardObj.Position.Z);
                     }
-                    else { Moved = 0; Hazzard.state = Hazzard.State.Idle1; }
+                    else { Moved = 0; Hazard.state = Hazard.State.Idle1; }
                     break;
             }
 
-            if (Hazzard.state == Hazzard.State.Idle1 || Hazzard.state == Hazzard.State.Idle2)
+            if (Hazard.state == Hazard.State.Idle1 || Hazard.state == Hazard.State.Idle2)
             {
                 if (DelayHazAnimation > 5f)
                 {
@@ -826,13 +826,13 @@ namespace Orts.Viewer3D
                 }
             }
 
-            if (Hazzard.state == Hazzard.State.LookLeft || Hazzard.state == Hazzard.State.LookRight)
+            if (Hazard.state == Hazard.State.LookLeft || Hazard.state == Hazard.State.LookRight)
             {
                 if (AnimationKey < CurrentRange.X) AnimationKey = CurrentRange.X;
                 if (AnimationKey > CurrentRange.Y) AnimationKey = CurrentRange.Y;
             }
 
-            if (Hazzard.state == Hazzard.State.Scared)
+            if (Hazard.state == Hazard.State.Scared)
             {
                 if (AnimationKey < CurrentRange.X) AnimationKey = CurrentRange.X;
 
