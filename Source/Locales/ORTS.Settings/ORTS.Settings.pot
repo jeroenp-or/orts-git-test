@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-12-30 17:56:10+0100\n"
-"PO-Revision-Date: 2016-12-30 17:56:10+0100\n"
+"POT-Creation-Date: 2017-08-04 22:28:50+0200\n"
+"PO-Revision-Date: 2017-08-04 22:28:50+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -663,22 +663,26 @@ msgstr ""
 msgid "Control Turntable Counterclockwise"
 msgstr ""
 
-#: ../../ORTS.Settings/InputSettings.cs:666
-#, csharp-format
-msgid "{0} requires and is modified by Shift"
+#: ../../ORTS.Settings/InputSettings.cs:209
+msgid "Control Cab Radio"
 msgstr ""
 
 #: ../../ORTS.Settings/InputSettings.cs:668
 #, csharp-format
-msgid "{0} requires and is modified by Control"
+msgid "{0} requires and is modified by Shift"
 msgstr ""
 
 #: ../../ORTS.Settings/InputSettings.cs:670
 #, csharp-format
+msgid "{0} requires and is modified by Control"
+msgstr ""
+
+#: ../../ORTS.Settings/InputSettings.cs:672
+#, csharp-format
 msgid "{0} requires and is modified by Alt"
 msgstr ""
 
-#: ../../ORTS.Settings/InputSettings.cs:701
+#: ../../ORTS.Settings/InputSettings.cs:703
 #, csharp-format
 msgid "{0} and {1} both match {2}"
 msgstr ""
