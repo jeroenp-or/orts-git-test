@@ -955,7 +955,7 @@ namespace Orts.Parsers.Msts
         SignalItem,
         PickupItem,
         PlatformItem,
-        HazzardItem,
+        HazardItem,
         CarSpawnerItem,
         SidingItem,
         LevelCrItem,
