@@ -517,9 +517,9 @@ begin
     savedialog1.Title:=DLGsave;
     savedialog1.InitialDir:=utf8tosys(getroutepath+'Activities\Openrails');
     //savedialog1.Filter:='Openrails Zeitplan|*.timetable_or';
-    savedialog1.Filter:='Openrails timetable (*.timetable_or)|*.timetable_or';
+    savedialog1.Filter:='Openrails timetable (*.timetable-or)|*.timetable-or|Openrails timetable (*.timetable_or)|*.timetable_or';
     if ttfilename <> '' then savedialog1.filename:=ttfilename
-    else savedialog1.filename:=title+'.timetable_or';
+    else savedialog1.filename:=title+'.timetable-or';
     save:=true;
     but:=1;
     if (savedialog1.Execute) and (savedialog1.FileName<>'') then begin
@@ -536,7 +536,7 @@ begin
         for r:=0 to rows do begin
           line:='';
           for c:=0 to cols do begin
-            line:=line+grid.cells[c,r]+';';
+            line:=line+grid.cells[c,r]+chr(9);
           end;
           line:=copy(line,1,length(line)-1);
           lines.add(line);
@@ -593,13 +593,15 @@ procedure TForm1.SpeedButton2Click(Sender: TObject);  // öffnen
 var slist: tstringlist;
     z,s,mcols: integer;
     cols: tstringlist;
+    tab: boolean;
 begin
   slist:=tstringlist.create;
   cols:=tstringlist.create;
+  tab:=false;
   //opendialog1.Title:='Zeitplan öffnen';
   opendialog1.Title:=DLGopenTT;
   //opendialog1.Filter:='Openrails Zeitplan|*.timetable_or';
-  opendialog1.Filter:='Openrails timetable (*.timetable_or)|*.timetable_or';
+  opendialog1.Filter:='Openrails timetable (*.timetable-or;*.timetable_or)|*.timetable-or;*.timetable_or';
   opendialog1.filename:='';
   if (opendialog1.execute) and (opendialog1.FileName<>'') then begin
     resetgrid;
@@ -610,13 +612,14 @@ begin
     fces.reset;
     fces.loadfromfile(utf8tosys(opendialog1.filename));
     slist.text:=fces.utf8text;
-    split(';',slist[0],cols);
+    if pos(chr(9),slist.text) > 0 then tab:=true;
+    if tab then split(chr(9),slist[0],cols) else split(';',slist[0],cols);
     mcols:=0;
     mcols:=cols.count;
     if mcols +1 > grid.colcount then grid.colcount:=mcols+1;
     if slist.count +1 > grid.rowcount then grid.rowcount:=slist.count+1;
     for z:=0 to slist.count -1 do begin
-      split(';',slist[z],cols);
+      if tab then split(chr(9),slist[z],cols) else split(';',slist[z],cols);
       for s:= 0 to cols.count -1 do begin
         grid.cells[s,z]:=cols[s];
       end;
