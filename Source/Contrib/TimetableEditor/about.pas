@@ -17,8 +17,6 @@ type
     Label2: TLabel;
     StaticText1: TStaticText;
     procedure Button1Click(Sender: TObject);
-    procedure StaticText4Click(Sender: TObject);
-
   private
     { private declarations }
   public
@@ -40,12 +38,6 @@ implementation
 procedure TForm2.Button1Click(Sender: TObject);
 begin
   form2.Close;
-end;
-
-
-procedure TForm2.StaticText4Click(Sender: TObject);
-begin
-
 end;
 
 
